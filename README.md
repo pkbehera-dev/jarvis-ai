@@ -22,25 +22,28 @@ Before you begin, ensure you have the following installed:
 Follow these steps to get Jarvis up and running on your local machine:
 
 1.  **Clone the repository:**
+
     ```bash
     git clone https://github.com/your-username/Jarvis-AI.git
     cd Jarvis-AI
     ```
 
 2.  **Create a virtual environment (recommended):**
+
     ```bash
     python -m venv venv
     ```
 
 3.  **Activate the virtual environment:**
-    -   **Windows:**
-        ```bash
-        .\venv\Scripts\activate
-        ```
-    -   **macOS/Linux:**
-        ```bash
-        source venv/bin/activate
-        ```
+
+    - **Windows:**
+      ```bash
+      .\venv\Scripts\activate
+      ```
+    - **macOS/Linux:**
+      ```bash
+      source venv/bin/activate
+      ```
 
 4.  **Install dependencies:**
     ```bash
@@ -50,33 +53,37 @@ Follow these steps to get Jarvis up and running on your local machine:
 ## Configuration
 
 1.  **Google Gemini API Key:**
-    -   Obtain a Google Gemini API key from the [Google AI Studio](https://aistudio.google.com/)
-    -   Open `config.py` and replace `"YOUR_GOOGLE_API_KEY"` with your actual API key:
-        ```python
-        # config.py
-        GOOGLE_API_KEY = "YOUR_GOOGLE_API_KEY"
-        ```
+
+    - Obtain a Google Gemini API key from the [Google AI Studio](https://aistudio.google.com/)
+    - Open `config.py` and replace `"YOUR_GOOGLE_API_KEY"` with your actual API key:
+      ```python
+      # config.py
+      GOOGLE_API_KEY = "YOUR_GOOGLE_API_KEY"
+      ```
+      Note: Create a config.py in your root directory.
 
 2.  **Custom Commands (Optional):**
-    -   Edit `commands.json` to add or modify custom commands for Jarvis. This file defines phrases for opening applications, searching websites, etc.
+    - Edit `commands.json` to add or modify custom commands for Jarvis. This file defines phrases for opening applications, searching websites, etc.
 
 ## Usage
 
 1.  **Run the Flask application:**
+
     ```bash
     python app.py
     ```
 
 2.  **Access Jarvis:**
-    -   Open your web browser and navigate to `http://127.0.0.1:5000/`.
+
+    - Open your web browser and navigate to `http://127.0.0.1:5000/`.
 
 3.  **Interact:**
-    -   Type your commands or questions into the chat input and press Enter or click "Send".
+    - Type your commands or questions into the chat input and press Enter or click "Send".
 
 ## Customization
 
--   **AI Identity:** The AI's name (Jarvis) and creator (Pradyumna) are hardcoded in `app.py`.
--   **System Commands:** Modify `commands.json` to extend Jarvis's capabilities with new system commands.
+- **AI Identity:** The AI's name (Jarvis) and creator (Pradyumna) are hardcoded in `app.py`.
+- **System Commands:** Modify `commands.json` to extend Jarvis's capabilities with new system commands.
 
 ## Contributing
 
@@ -88,4 +95,4 @@ This project is licensed under the MIT License - see the `LICENSE` file for deta
 
 ## Credits
 
--   **Creator:** Pradyumna
+- **Creator:** Pradyumna
