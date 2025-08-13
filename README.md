@@ -64,38 +64,45 @@ Follow these steps to get Jarvis up and running on your local machine:
 2.  **Custom Commands (Optional):**
     - Edit `commands.json` to add or modify custom commands for Jarvis. This file defines phrases for opening applications, searching websites, etc.
 
-### Deploying to Production
-
-When deploying the application to a hosting service like Render, do not upload the `.env` file. Instead, set the `GOOGLE_API_KEY` as an environment variable in your hosting provider's dashboard.
-
 ## Usage
 
-1.  **Run the Flask application:**
+### Local Development (Windows)
+
+For local development on Windows, it is recommended to use the `waitress` server.
+
+1.  **Run the application with Waitress:**
 
     ```bash
-    python app.py
+    waitress-serve --host 127.0.0.1 --port 5000 app:app
     ```
 
 2.  **Access Jarvis:**
 
     - Open your web browser and navigate to `http://127.0.0.1:5000/`.
 
-3.  **Interact:**
-    - Type your commands or questions into the chat input and press Enter or click "Send".
+### Local Development (macOS/Linux)
 
-## Customization
+On macOS and Linux, you can use the Flask development server or Gunicorn.
 
-- **AI Identity:** The AI's name (Jarvis) and creator (Pradyumna) are hardcoded in `app.py`.
-- **System Commands:** Modify `commands.json` to extend Jarvis's capabilities with new system commands.
+1.  **Run with Flask development server:**
 
-## Contributing
+    ```bash
+    python app.py
+    ```
 
-Contributions are welcome! If you have suggestions for improvements or new features, please open an issue or submit a pull request.
+2.  **Run with Gunicorn:**
 
-## License
+    ```bash
+    gunicorn --bind 127.0.0.1:5000 app:app
+    ```
 
-This project is licensed under the MIT License - see the `LICENSE` file for details. (Note: A `LICENSE` file is not included in this project. You may want to create one.)
+## Deploying to Production
 
-## Credits
+This project is configured to be deployed to services like Render or Heroku.
 
-- **Creator:** Pradyumna
+1.  **Procfile:** The `Procfile` in the root of the repository tells the hosting service how to run the application using Gunicorn:
+    ```
+    web: gunicorn app:app
+    ```
+
+2.  **Environment Variables:** As mentioned in the configuration section, do not upload your `.env` file. Instead, set the `GOOGLE_API_KEY` as an environment variable in your hosting provider's dashboard.
