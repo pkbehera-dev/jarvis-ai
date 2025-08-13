@@ -2,10 +2,13 @@ import html
 from flask import Flask, render_template, request, jsonify
 import json
 import system_commands
-import config
+import os
+from dotenv import load_dotenv
 import requests
 import re
 import time # Import time module
+
+load_dotenv()
 
 app = Flask(__name__)
 
@@ -36,7 +39,7 @@ def get_gemini_response(user_query, chat_history):
     }
     
     try:
-        response = requests.post(f"{GEMINI_API_URL}?key={config.GOOGLE_API_KEY}", headers=headers, json=data)
+        response = requests.post(f'{GEMINI_API_URL}?key={os.getenv("GOOGLE_API_KEY")}', headers=headers, json=data)
         response.raise_for_status()
         response_json = response.json()
         

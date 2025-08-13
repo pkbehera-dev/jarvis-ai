@@ -55,15 +55,18 @@ Follow these steps to get Jarvis up and running on your local machine:
 1.  **Google Gemini API Key:**
 
     - Obtain a Google Gemini API key from the [Google AI Studio](https://aistudio.google.com/)
-    - Open `config.py` and replace `"YOUR_GOOGLE_API_KEY"` with your actual API key:
-      ```python
-      # config.py
-      GOOGLE_API_KEY = "YOUR_GOOGLE_API_KEY"
+    - Create a file named `.env` in the root directory of the project.
+    - Add the following line to the `.env` file, replacing `YOUR_GOOGLE_API_KEY` with your actual API key:
       ```
-      Note: Create a config.py in your root directory.
+      GOOGLE_API_KEY=YOUR_GOOGLE_API_KEY
+      ```
 
 2.  **Custom Commands (Optional):**
     - Edit `commands.json` to add or modify custom commands for Jarvis. This file defines phrases for opening applications, searching websites, etc.
+
+### Deploying to Production
+
+When deploying the application to a hosting service like Render, do not upload the `.env` file. Instead, set the `GOOGLE_API_KEY` as an environment variable in your hosting provider's dashboard.
 
 ## Usage
 
