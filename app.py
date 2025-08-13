@@ -104,5 +104,9 @@ def chat():
     
     return jsonify({"response": response, "chat_history": chat_history, "response_time": response_time}) # Include response_time
 
+@app.route('/privacy-terms')
+def privacy_terms():
+    return render_template('privacy&terms.html')
+
 if __name__ == '__main__':
     app.run(debug=True)
