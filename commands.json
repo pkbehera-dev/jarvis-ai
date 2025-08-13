@@ -1,0 +1,9 @@
+{
+  "open_app_phrase": "open",
+  "search_phrase": "search for",
+  "search_url": "https://www.google.com/search?q={query}",
+  "web_phrases": {
+    "google": "https://www.google.com",
+    "youtube": "https://www.youtube.com"
+  }
+}
