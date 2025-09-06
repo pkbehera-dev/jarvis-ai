@@ -79,7 +79,7 @@ def handle_memory_command(query, memory):
     # Pattern for "I am from X"
     match = re.search(r"i am from\s+(.+)", query_lower)
     if match:
-        location = match.group(1).strip() # Corrected from match(1)
+        location = match.group(1).strip()
         memory["user_info"]["location"] = location
         return f"Okay, I will remember that you are from {location}.", True
 
@@ -197,28 +197,26 @@ def execute_command(query, memory, chat_history):
     open_app_phrase = commands.get("open_app_phrase", "")
     if open_app_phrase and query.startswith(open_app_phrase):
         app_name_to_open = query.replace(open_app_phrase, "").strip()
-        # Try to open using platform-specific commands
+        
+        # Determine the command based on the operating system
         if sys.platform == "win32":
-            try:
-                subprocess.Popen(["start", "", app_name_to_open], shell=True, start_new_session=True)
-                return f"Opening {app_name_to_open}.", False
-            except Exception as e:
-                return f"An error occurred while trying to open {app_name_to_open}: {e}", False
+            command = ["start", "", app_name_to_open]
+            shell = True
         elif sys.platform == "darwin": # macOS
-            try:
-                subprocess.Popen(["open", app_name_to_open], start_new_session=True)
-                return f"Opening {app_name_to_open}.", False
-            except Exception as e:
-                return f"An error occurred while trying to open {app_name_to_open}: {e}", False
+            command = ["open", "-a", app_name_to_open]
+            shell = False
         elif sys.platform.startswith("linux"): # Linux
-            try:
-                subprocess.Popen(["xdg-open", app_name_to_open], start_new_session=True)
-                return f"Opening {app_name_to_open}.", False
-            except Exception as e:
-                return f"An error occurred while trying to open {app_name_to_open}: {e}", False
+            command = ["xdg-open", app_name_to_open]
+            shell = False
         else:
             return f"Sorry, I don't know how to open applications on your operating system ({sys.platform}).", False
-    
+        
+        try:
+            subprocess.Popen(command, shell=shell, start_new_session=True)
+            return f"Opening {app_name_to_open}.", False
+        except Exception as e:
+            return f"An error occurred while trying to open {app_name_to_open}: {e}", False
+
     # Search on a website
     search_phrase = commands.get("search_phrase", "")
     if search_phrase and query.startswith(search_phrase):
@@ -228,7 +226,7 @@ def execute_command(query, memory, chat_history):
         return f"Searching for {search_query}.", False
     
     # Greeting commands
-    greetings = ["hello", "hi", "hey"]
+    greetings = {"hello", "hi", "hey"}
     for greeting in greetings:
         if query.startswith(greeting) or query == greeting:
             return random.choice(["Hello!", "Hi there!", "Hey! How can I help?"]), False

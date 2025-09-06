@@ -12,6 +12,12 @@ load_dotenv()
 
 app = Flask(__name__)
 
+# Load and validate the Google API Key
+API_KEY = os.getenv("GOOGLE_API_KEY")
+if not API_KEY:
+    raise ValueError("GOOGLE_API_KEY not found. Please create a .env file in the root directory and add your API key, e.g., GOOGLE_API_KEY=your_actual_key")
+
+
 # Hardcoded permanent memory
 memory = {
     "AI_NAME": "Jarvis",
@@ -39,7 +45,7 @@ def get_gemini_response(user_query, chat_history):
     }
     
     try:
-        response = requests.post(f'{GEMINI_API_URL}?key={os.getenv("GOOGLE_API_KEY")}', headers=headers, json=data)
+        response = requests.post(f'{GEMINI_API_URL}?key={API_KEY}', headers=headers, json=data)
         response.raise_for_status()
         response_json = response.json()
         
